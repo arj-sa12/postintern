@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Internship Opportunity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .required {
+            color: #ff6b6b;
+        }
+
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown-button {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-button:hover, .dropdown-button.active {
+            border-color: #667eea;
+            background: white;
+        }
+
+        .dropdown-arrow {
+            margin-left: auto;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .search-input {
+            padding: 12px;
+            border: none;
+            border-bottom: 1px solid #e0e6ed;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-bottom-color: #667eea;
+        }
+
+        .dropdown-option {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .dropdown-option.selected {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .selected-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .selected-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remove-item {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .remove-item:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Post Internship Opportunity</h1>
+            <p>Connect with talented interns and grow your team</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="internshipForm">
+                <div class="form-group">
+                    <label for="companyName">Company Name <span class="required">*</span></label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobTitle">Internship Title <span class="required">*</span></label>
+                    <input type="text" id="jobTitle" name="jobTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="candidatesNeeded">Number of Candidates Needed <span class="required">*</span></label>
+                    <input type="number" id="candidatesNeeded" name="candidatesNeeded" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Required Skills <span class="required">*</span></label>
+                    <div class="dropdown-container">
+                        <div class="dropdown-button" id="skillsDropdown">
+                            <span>Select Skills</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="skillsMenu">
+                            <input type="text" class="search-input" id="skillsSearch" placeholder="Search skills...">
+                            <div id="skillsOptions"></div>
+                        </div>
+                        <div class="selected-items" id="selectedSkills"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="qualification">Minimum Qualification <span class="required">*</span></label>
+                    <div class="dropdown-container">
+                        <div class="dropdown-button" id="qualificationDropdown">
+                            <span>Select Qualification</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="qualificationMenu">
+                            <div id="qualificationOptions"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="locations">Location <span class="required">*</span></label>
+                    <div class="dropdown-container">
+                        <div class="dropdown-button" id="locationsDropdown">
+                            <span>Select Locations</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="locationsMenu">
+                            <input type="text" class="search-input" id="locationsSearch" placeholder="Search locations...">
+                            <div id="locationsOptions"></div>
+                        </div>
+                        <div class="selected-items" id="selectedLocations"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Past Experience Requirement</label>
+                    <textarea id="experience" name="experience" placeholder="Describe any past experience requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Post Internship Opportunity</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-firestore-compat.min.js"></script>
+
+    <script>
+        // Firebase configuration (replace with your config)
+        const firebaseConfig = {
+        apiKey: "AIzaSyCu5z678w7KcVU2uT3oR_o6sEDre5iLFSI",
+        authDomain: "sih2025-bab92.firebaseapp.com",
+        projectId: "sih2025-bab92",
+        storageBucket: "sih2025-bab92.firebasestorage.app",
+        messagingSenderId: "164541371617",
+        appId: "1:164541371617:web:67733797a66a97eeba53a0",
+        measurementId: "G-4W80YH0GFF"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Skills data
+        const skillsData = [
+            'JavaScript', 'Python', 'Java', 'C++', 'C#', 'PHP', 'Ruby', 'Go', 'Rust', 'Swift',
+            'React', 'Angular', 'Vue.js', 'Node.js', 'Express.js', 'Django', 'Flask', 'Spring Boot',
+            'HTML', 'CSS', 'SASS', 'Bootstrap', 'Tailwind CSS', 'jQuery', 'TypeScript',
+            'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'SQLite', 'Oracle', 'SQL Server',
+            'AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes', 'Jenkins', 'Git', 'GitHub',
+            'Machine Learning', 'Data Science', 'Artificial Intelligence', 'Deep Learning',
+            'Photoshop', 'Illustrator', 'Figma', 'Adobe XD', 'Sketch', 'UI/UX Design',
+            'Digital Marketing', 'SEO', 'SEM', 'Content Marketing', 'Social Media Marketing',
+            'Project Management', 'Agile', 'Scrum', 'Leadership', 'Communication', 'Teamwork',
+            'Data Analysis', 'Excel', 'PowerBI', 'Tableau', 'R', 'SPSS', 'Statistics',
+            'Android Development', 'iOS Development', 'Flutter', 'React Native', 'Xamarin',
+            'Cybersecurity', 'Network Security', 'Ethical Hacking', 'Penetration Testing',
+            'DevOps', 'Linux', 'Windows Server', 'System Administration', 'Networking',
+            'Blockchain', 'Cryptocurrency', 'Smart Contracts', 'Solidity', 'Web3'
+        ];
+
+        // Qualifications data
+        const qualificationsData = [
+            'Class 10th', 'Class 12th', 'Diploma', 'ITI', 'Graduate (Any)', 'B.Tech/B.E', 
+            'BCA', 'B.Com', 'B.Sc', 'BBA', 'B.A', 'Post Graduate (Any)', 'M.Tech/M.E', 
+            'MCA', 'MBA', 'M.Com', 'M.Sc', 'M.A', 'Ph.D'
+        ];
+
+        // Locations data (Tier 1 and Tier 2 cities)
+        const locationsData = [
+            // Tier 1 cities
+            'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad',
+            // Tier 2 cities
+            'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur', 'Indore', 'Thane', 'Bhopal', 'Visakhapatnam',
+            'Pimpri-Chinchwad', 'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik',
+            'Faridabad', 'Meerut', 'Rajkot', 'Kalyan-Dombivali', 'Vasai-Virar', 'Varanasi',
+            'Srinagar', 'Aurangabad', 'Dhanbad', 'Amritsar', 'Navi Mumbai', 'Allahabad', 'Howrah',
+            'Ranchi', 'Gwalior', 'Jabalpur', 'Coimbatore', 'Vijayawada', 'Jodhpur', 'Madurai',
+            'Raipur', 'Kota', 'Chandigarh', 'Guwahati', 'Solapur', 'Hubli-Dharwad', 'Tiruchirappalli',
+            'Bareilly', 'Mysore', 'Tiruppur', 'Gurgaon', 'Aligarh', 'Jalandhar', 'Bhubaneswar',
+            'Salem', 'Warangal', 'Guntur', 'Bhiwandi', 'Saharanpur', 'Gorakhpur', 'Bikaner',
+            'Amravati', 'Noida', 'Jamshedpur', 'Bhilai', 'Cuttack', 'Firozabad', 'Kochi'
+        ];
+
+        // Global state
+        let selectedSkills = [];
+        let selectedLocations = [];
+        let selectedQualification = '';
+
+        // Initialize dropdowns
+        function initializeDropdowns() {
+            createDropdown('skills', skillsData, true);
+            createDropdown('qualification', qualificationsData, false);
+            createDropdown('locations', locationsData, true);
+        }
+
+        function createDropdown(type, data, isMultiple) {
+            const optionsContainer = document.getElementById(`${type}Options`);
+            const dropdown = document.getElementById(`${type}Dropdown`);
+            const menu = document.getElementById(`${type}Menu`);
+            const arrow = dropdown.querySelector('.dropdown-arrow');
+
+            // Create options
+            data.forEach(item => {
+                const option = document.createElement('div');
+                option.className = 'dropdown-option';
+                option.textContent = item;
+                option.addEventListener('click', () => selectOption(type, item, isMultiple));
+                optionsContainer.appendChild(option);
+            });
+
+            // Setup dropdown toggle
+            dropdown.addEventListener('click', () => {
+                const isOpen = menu.classList.contains('show');
+                closeAllDropdowns();
+                if (!isOpen) {
+                    menu.classList.add('show');
+                    dropdown.classList.add('active');
+                    arrow.classList.add('open');
+                }
+            });
+
+            // Setup search if applicable
+            const searchInput = document.getElementById(`${type}Search`);
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    filterOptions(type, e.target.value);
+                });
+                searchInput.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+        }
+
+        function selectOption(type, value, isMultiple) {
+            if (isMultiple) {
+                if (type === 'skills') {
+                    if (!selectedSkills.includes(value)) {
+                        selectedSkills.push(value);
+                        updateSelectedItems('skills', selectedSkills);
+                        updateDropdownText('skills', selectedSkills);
+                    }
+                } else if (type === 'locations') {
+                    if (!selectedLocations.includes(value)) {
+                        selectedLocations.push(value);
+                        updateSelectedItems('locations', selectedLocations);
+                        updateDropdownText('locations', selectedLocations);
+                    }
+                }
+            } else {
+                selectedQualification = value;
+                updateDropdownText('qualification', [value]);
+                closeAllDropdowns();
+            }
+        }
+
+        function updateSelectedItems(type, items) {
+            const container = document.getElementById(`selected${type.charAt(0).toUpperCase() + type.slice(1)}`);
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'selected-item';
+                itemElement.innerHTML = `
+                    <span>${item}</span>
+                    <button type="button" class="remove-item" onclick="removeItem('${type}', '${item}')">×</button>
+                `;
+                container.appendChild(itemElement);
+            });
+        }
+
+        function removeItem(type, value) {
+            if (type === 'skills') {
+                selectedSkills = selectedSkills.filter(skill => skill !== value);
+                updateSelectedItems('skills', selectedSkills);
+                updateDropdownText('skills', selectedSkills);
+            } else if (type === 'locations') {
+                selectedLocations = selectedLocations.filter(location => location !== value);
+                updateSelectedItems('locations', selectedLocations);
+                updateDropdownText('locations', selectedLocations);
+            }
+        }
+
+        function updateDropdownText(type, items) {
+            const dropdown = document.getElementById(`${type}Dropdown`);
+            const span = dropdown.querySelector('span');
+            
+            if (type === 'skills') {
+                span.textContent = items.length > 0 ? `${items.length} skill(s) selected` : 'Select Skills';
+            } else if (type === 'locations') {
+                span.textContent = items.length > 0 ? `${items.length} location(s) selected` : 'Select Locations';
+            } else if (type === 'qualification') {
+                span.textContent = items.length > 0 ? items[0] : 'Select Qualification';
+            }
+        }
+
+        function filterOptions(type, searchTerm) {
+            const options = document.querySelectorAll(`#${type}Options .dropdown-option`);
+            options.forEach(option => {
+                const text = option.textContent.toLowerCase();
+                const match = text.includes(searchTerm.toLowerCase());
+                option.style.display = match ? 'flex' : 'none';
+            });
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('show');
+            });
+            document.querySelectorAll('.dropdown-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelectorAll('.dropdown-arrow').forEach(arrow => {
+                arrow.classList.remove('open');
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown-container')) {
+                closeAllDropdowns();
+            }
+        });
+
+        // Form submission
+        document.getElementById('internshipForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Posting...';
+
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                jobTitle: document.getElementById('jobTitle').value,
+                candidatesNeeded: parseInt(document.getElementById('candidatesNeeded').value),
+                skills: selectedSkills,
+                qualification: selectedQualification,
+                locations: selectedLocations,
+                experience: document.getElementById('experience').value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                // Add validation
+                if (selectedSkills.length === 0) {
+                    throw new Error('Please select at least one skill');
+                }
+                if (!selectedQualification) {
+                    throw new Error('Please select minimum qualification');
+                }
+                if (selectedLocations.length === 0) {
+                    throw new Error('Please select at least one location');
+                }
+
+                await db.collection('internships').add(formData);
+                alert('Internship opportunity posted successfully!');
+                
+                // Reset form
+                document.getElementById('internshipForm').reset();
+                selectedSkills = [];
+                selectedLocations = [];
+                selectedQualification = '';
+                updateSelectedItems('skills', selectedSkills);
+                updateSelectedItems('locations', selectedLocations);
+                updateDropdownText('skills', selectedSkills);
+                updateDropdownText('locations', selectedLocations);
+                updateDropdownText('qualification', []);
+                
+            } catch (error) {
+                console.error('Error posting internship:', error);
+                alert('Error posting internship: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Post Internship Opportunity';
+            }
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeDropdowns);
+    </script>
+</body>
+</html>
